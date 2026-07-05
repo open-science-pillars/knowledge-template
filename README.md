@@ -60,6 +60,3 @@ your-bundle/
 Copy the bundle, delete the four `example-*` files once you have real
 concepts, keep index.md and log.md current. Lint with the knowledge-linter
 agent (core plugin) before every release.
-
-Authored in Session 1 per SPECIFICATION.md v0.5.1 §5 and the
-IMPLEMENTATION-GUIDE Session 1 block.
