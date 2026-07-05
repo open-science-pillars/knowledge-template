@@ -14,7 +14,9 @@ with standard markdown links; every gotcha links its dataset concept.
 
 ## Conformance walk (SPEC §5.1, §5.2)
 
-Frontmatter, every concept:
+Frontmatter, every concept (STRICT YAML: quote any value containing
+a colon, e.g. `title: "Unmasked fill values: the sentinel list"`; the
+linter red-flags unquoted ones):
 
 - `type` (REQUIRED by OKF): `dataset`, `dataset-gotcha`, `recipe`, or `convention`
 - `title`, `description`, `tags`, `timestamp` (required org-wide)
