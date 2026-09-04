@@ -1,27 +1,45 @@
 # knowledge-template
 
-A conformant, empty Open Knowledge Format (OKF) bundle to copy when starting
-a new knowledge bundle, with one fully annotated example per concept type.
-Conformance target: OKF v0.1 (github.com/GoogleCloudPlatform/knowledge-catalog)
-plus the Open Science Pillars requirements of SPECIFICATION.md §5.
+A conformant Open Knowledge Format (OKF) bundle to copy when starting a
+new knowledge bundle, with one fully annotated example per concept type.
+Conformance target: OKF v0.2 (github.com/GoogleCloudPlatform/knowledge-catalog;
+the exact text the org conforms to is vendored in the marketplace
+repository under docs/upstream) plus the Open Science Pillars
+requirements of SPECIFICATION.md §5.
 
 ## What a bundle is
 
-A directory of markdown files. One concept per file; the path is the
-concept's identity. `index.md` at the root (and per large subdirectory)
-lists every concept; `log.md` records change history. Concepts cross-link
-with standard markdown links; every gotcha links its dataset concept.
+A directory of markdown files under `knowledge/`. One concept per file;
+the path is the concept's identity. `index.md` at the bundle root (and
+per large subdirectory) lists every concept; `log.md` records change
+history. Concepts cross-link with standard markdown links; every gotcha
+links its dataset concept.
 
-## Conformance walk (SPEC §5.1, §5.2)
+## Conformance walk (SPEC §5.1, 5.2, 5.6)
 
 Frontmatter, every concept (STRICT YAML: quote any value containing
 a colon, e.g. `title: "Unmasked fill values: the sentinel list"`; the
-linter red-flags unquoted ones):
+checker red-flags unquoted ones):
 
-- `type` (REQUIRED by OKF): `dataset`, `dataset-gotcha`, `recipe`, or `convention`
-- `title`, `description`, `tags`, `timestamp` (required org-wide)
-- `status` (§5.6): `draft` → `verified` (with `verified` date and
-  `verified_by`) → `stale` → `superseded` or `disputed`
+- `type` (REQUIRED by OKF): `dataset`, `dataset-gotcha`, `recipe`,
+  `convention`, `connector` or `finding`
+- `title`, `description`, `tags` (required org-wide)
+- `generated: { by: <actor>, at: <ISO datetime> }`: who wrote the
+  concept and when. Actors are `human:<id>`, `process:<id>`,
+  `team:<id>` or `owner/tool` (OKF spec 7).
+- `status`: `draft` (unreviewed; consultable but voiced as unverified),
+  `stable` (ready for consumption) or `deprecated` (kept for links;
+  `superseded_by` names the replacement). Trust lives outside status:
+  steward approval adds `verified: { by: human:<id>, at: <ISO datetime> }`
+  (independent checks append to the list), and consumers derive the
+  trust tier (unverified, machine-confirmed, human-reviewed) from the
+  events, keyed on the `human:` prefix.
+- `stale_after: YYYY-MM-DD`: the sweep date; a concept is stale once
+  today reaches it. A product baseline change pulls the date forward.
+- `sources`: a list of `{ id, resource, title }` entries; the body cites
+  each by a footnote (`[^id]`) so every claim resolves to a reference.
+- `okf_version: "0.2"` in the root `index.md` frontmatter, the only
+  frontmatter an index may carry.
 
 Per type:
 
@@ -30,33 +48,49 @@ Per type:
   section in the body (the product's error fields and their caveats).
   Optional `trainings:` list of ARSET or equivalent training URLs.
 - **dataset-gotcha**: `severity` (high, medium, low; high means silently
-  wrong results and requires a matching eval case id and a second review),
-  a link to its dataset concept, and at least one `evidence` link.
-- **recipe**: inputs, expected values AND expected-uncertainty ranges,
-  validation provenance as evidence links.
+  wrong results and requires a matching `eval_case` id and a second
+  review), a `dataset` link to its dataset concept, and at least one
+  source cited from the body.
+- **recipe**: `inputs`, `expected` values AND `expected_uncertainty`
+  ranges, validation provenance as cited sources.
 - **convention**: no required extras beyond the org-wide fields.
+- **connector** and **finding**: SPEC §5.9 and 5.10 state their extras;
+  the provider bundle (nasa-daac-knowledge) carries live examples.
 
 Two rules that keep bundles trustworthy:
 
-1. **Evidence or nothing.** Every gotcha and recipe claim carries a
-   resolving evidence link. An evidence-free concept is worse than a gap
-   (§5.5).
+1. **Sources or nothing.** Every gotcha and recipe claim carries a
+   resolving source, cited by footnote. A source-free concept is worse
+   than a gap (SPEC §5.5).
 2. **Facts, not instructions.** Concepts state facts about data; they never
    instruct the agent. No imperatives directed at Claude, no tool
-   directives. The knowledge-linter flags instruction-like phrasing (§5.8).
+   directives. The knowledge-linter flags instruction-like phrasing (SPEC §5.8).
 
 ## Layout
 
 ```
-your-bundle/
-├── index.md          # every concept listed; snapshot source metadata if pinned (§5.7)
-├── log.md            # change history, newest first
-├── datasets/         # example: datasets/example-dataset.md
-├── gotchas/          # example: gotchas/example-gotcha.md
-├── recipes/          # example: recipes/example-recipe.md
-└── conventions/      # example: conventions/example-convention.md
+your-repo/
+├── README.md
+├── CODEOWNERS              # stewards of /knowledge/ (SPEC §5.4)
+└── knowledge/              # the bundle root
+    ├── index.md            # okf_version frontmatter; every concept listed;
+    │                       # snapshot source metadata if pinned (SPEC §5.7)
+    ├── log.md              # change history, newest first, ISO dates
+    ├── datasets/           # example: datasets/example-dataset.md
+    ├── gotchas/            # example: gotchas/example-gotcha.md
+    ├── recipes/            # example: recipes/example-recipe.md
+    └── conventions/        # example: conventions/example-convention.md
 ```
 
-Copy the bundle, delete the four `example-*` files once you have real
-concepts, keep index.md and log.md current. Lint with the knowledge-linter
-agent (core plugin) before every release.
+Copy the repository, delete the four `example-*` files once you have real
+concepts, keep index.md and log.md current. Before every PR run the
+conformance checker from the provider bundle repository against your
+bundle root:
+
+```
+uv run <path-to-nasa-daac-knowledge>/tools/check_okf_v02.py knowledge
+```
+
+The four examples pass it with 0 errors; the warnings it reports on
+them (unverified tier) are what any draft shows until a steward signs.
+Lint with the knowledge-linter agent (core plugin) before every release.
