@@ -1,10 +1,11 @@
 ---
 type: convention
-title: Example seasonal-mean calendar convention
-description: Annotated example of a convention concept; a cross-cutting practice, no required extras beyond the org-wide fields.
+title: "Example seasonal-mean calendar convention"
+description: "Annotated example of a convention concept; a cross-cutting practice, no required extras beyond the org-wide fields."
 tags: [example, calendar, seasons]
-timestamp: 2026-07-04
+generated: { by: human:example-steward, at: 2026-07-04T00:00:00Z }
 status: draft
+stale_after: 2027-07-04
 ---
 
 # Example seasonal-mean calendar convention
