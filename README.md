@@ -96,8 +96,9 @@ uv run <path-to-nasa-daac-knowledge>/tools/check_okf_v02.py knowledge
 The four examples pass it with 0 errors; the warnings it reports on
 them (unverified tier) are what any draft shows until a steward signs.
 `.github/workflows/bundle-gate.yml` runs the same checker, the PEP 723
-header check on any script, and the signature-debt measure on every
-pull request and on main, and enforces zero debt on a release tag; a
+header check on any script, the wording check (specification rules
+cited by name, no program bookkeeping, no em or en dashes) and the
+signature-debt measure on every pull request and on main, and enforces zero debt on a release tag; a
 repository copied from this template is gated from its first pull
 request. The one edit it needs is the tag pattern, `{name}--v*`. Lint
 with the knowledge-linter agent (core plugin) before every release.
