@@ -10,12 +10,12 @@ The frontmatter above is the only frontmatter an index may carry (OKF
 v0.2 §12) and it declares the OKF version the bundle targets; the
 per-subdirectory index files of a large bundle carry none.
 
-If this bundle is a pinned snapshot of a provider bundle,
-record the source here and refresh it at every plugin release:
-
-- Snapshot source repository: (none; this is an original bundle)
-- Snapshot source commit: (n/a)
-- Snapshot date: (n/a)
+A bundle reaches its readers as an installed plugin: a domain plugin
+that consults this bundle declares the repository as a dependency with
+a version floor, and the installer installs and updates it alongside
+the plugin. Nothing is copied. If this bundle in turn consults another
+bundle, name it here under its own heading (canonical home, how it is
+consulted, precedence) rather than copying concepts from it.
 
 ## datasets
 

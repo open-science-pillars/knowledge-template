@@ -75,8 +75,7 @@ your-repo/
 ├── README.md
 ├── CODEOWNERS              # stewards of /knowledge/
 └── knowledge/              # the bundle root
-    ├── index.md            # okf_version frontmatter; every concept listed;
-    │                       # snapshot source metadata if pinned
+    ├── index.md            # okf_version frontmatter; every concept listed
     ├── log.md              # change history, newest first, ISO dates
     ├── datasets/           # example: datasets/example-dataset.md
     ├── gotchas/            # example: gotchas/example-gotcha.md
