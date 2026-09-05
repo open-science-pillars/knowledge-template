@@ -6,7 +6,7 @@ tags: [example, fill-values]
 generated: { by: human:example-steward, at: 2026-07-04T00:00:00Z }
 # severity: high | medium | low. High means the trap produces silently
 # wrong results (not an error, not a warning: wrong numbers). High severity
-# REQUIRES a matching eval case id and a second steward review (SPEC §5.2, 5.4).
+# REQUIRES a matching eval case id and a second steward review.
 severity: high
 # eval_case: required when severity is high; the eval case id that traps it.
 eval_case: example-fill-values
