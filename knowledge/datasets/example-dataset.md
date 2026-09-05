@@ -12,7 +12,7 @@ resource: https://podaac.jpl.nasa.gov/dataset/EXAMPLE_SST_V2.1
 # Version or processing baseline WITH the date you verified it. Baselines
 # change; a version claim without a verification date goes stale invisibly.
 version: "v2.1 (verified 2026-07-04 against the provider catalog)"
-# status (SPEC §5.6): draft (unreviewed), stable (ready to consume) or
+# status: draft (unreviewed), stable (ready to consume) or
 # deprecated (kept for links; `superseded_by` names the replacement).
 # A new concept starts as draft. Steward approval sets status stable AND
 # adds the event that carries the trust:
@@ -40,7 +40,7 @@ trainings:
 What the product is (instrument or model, level, grid, period, cadence),
 how to access it (the `resource` above; note authentication needs), and how
 it is structured (dimensions, coordinates, key variables with units).[^user-guide]
-State facts; do not instruct the agent (SPEC §5.8).
+State facts; do not instruct the agent (knowledge is declarative).
 
 ## Uncertainty
 

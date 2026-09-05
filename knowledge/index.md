@@ -7,10 +7,10 @@ okf_version: "0.2"
 Every concept in this bundle, one line each, grouped by type. Keep this
 current; the knowledge-linter flags concepts unreachable from index.md.
 The frontmatter above is the only frontmatter an index may carry (OKF
-spec 12) and it declares the OKF version the bundle targets; the
+v0.2 §12) and it declares the OKF version the bundle targets; the
 per-subdirectory index files of a large bundle carry none.
 
-If this bundle is a pinned snapshot of a provider bundle (SPEC §5.7),
+If this bundle is a pinned snapshot of a provider bundle,
 record the source here and refresh it at every plugin release:
 
 - Snapshot source repository: (none; this is an original bundle)

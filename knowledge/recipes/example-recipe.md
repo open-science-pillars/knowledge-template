@@ -9,7 +9,7 @@ inputs:
   - dataset: ../datasets/example-dataset.md
   - region: example basin, lon [-80, 0], lat [0, 60]
   - baseline: 1991-2020
-# expected values AND expected-uncertainty ranges are REQUIRED (SPEC §5.2).
+# expected values AND expected-uncertainty ranges are REQUIRED.
 # Skills read these; they never hardcode the numbers themselves.
 expected:
   - quantity: basin-mean anomaly, 2023 annual
@@ -40,6 +40,6 @@ per concept.
 
 Workflow skills consult this concept and compare their results against the
 `expected` and `expected_uncertainty` ranges above; golden notebooks assert
-against the same ranges (SPEC §6).
+against the same ranges.
 
 [^validation-note]: The validation run whose spread and ranges the frontmatter quotes.

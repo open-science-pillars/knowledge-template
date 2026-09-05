@@ -5,7 +5,8 @@ new knowledge bundle, with one fully annotated example per concept type.
 Conformance target: OKF v0.2 (github.com/GoogleCloudPlatform/knowledge-catalog;
 the exact text the org conforms to is vendored in the marketplace
 repository under docs/upstream) plus the Open Science Pillars
-requirements of SPECIFICATION.md §5.
+requirements of the specification's knowledge layer
+(docs/SPECIFICATION.md in open-science-pillars/marketplace).
 
 ## What a bundle is
 
@@ -15,7 +16,7 @@ per large subdirectory) lists every concept; `log.md` records change
 history. Concepts cross-link with standard markdown links; every gotcha
 links its dataset concept.
 
-## Conformance walk (SPEC §5.1, 5.2, 5.6)
+## Conformance walk (conformance, concept types, lifecycle)
 
 Frontmatter, every concept (STRICT YAML: quote any value containing
 a colon, e.g. `title: "Unmasked fill values: the sentinel list"`; the
@@ -26,7 +27,7 @@ checker red-flags unquoted ones):
 - `title`, `description`, `tags` (required org-wide)
 - `generated: { by: <actor>, at: <ISO datetime> }`: who wrote the
   concept and when. Actors are `human:<id>`, `process:<id>`,
-  `team:<id>` or `owner/tool` (OKF spec 7).
+  `team:<id>` or `owner/tool` (OKF v0.2 §7).
 - `status`: `draft` (unreviewed; consultable but voiced as unverified),
   `stable` (ready for consumption) or `deprecated` (kept for links;
   `superseded_by` names the replacement). Trust lives outside status:
@@ -54,27 +55,28 @@ Per type:
 - **recipe**: `inputs`, `expected` values AND `expected_uncertainty`
   ranges, validation provenance as cited sources.
 - **convention**: no required extras beyond the org-wide fields.
-- **connector** and **finding**: SPEC §5.9 and 5.10 state their extras;
-  the provider bundle (nasa-daac-knowledge) carries live examples.
+- **connector** and **finding**: the specification's connectors and
+  findings sections state their extras; the provider bundle
+  (nasa-daac-knowledge) carries live examples.
 
 Two rules that keep bundles trustworthy:
 
 1. **Sources or nothing.** Every gotcha and recipe claim carries a
    resolving source, cited by footnote. A source-free concept is worse
-   than a gap (SPEC §5.5).
+   than a gap.
 2. **Facts, not instructions.** Concepts state facts about data; they never
    instruct the agent. No imperatives directed at Claude, no tool
-   directives. The knowledge-linter flags instruction-like phrasing (SPEC §5.8).
+   directives. The knowledge-linter flags instruction-like phrasing.
 
 ## Layout
 
 ```
 your-repo/
 ├── README.md
-├── CODEOWNERS              # stewards of /knowledge/ (SPEC §5.4)
+├── CODEOWNERS              # stewards of /knowledge/
 └── knowledge/              # the bundle root
     ├── index.md            # okf_version frontmatter; every concept listed;
-    │                       # snapshot source metadata if pinned (SPEC §5.7)
+    │                       # snapshot source metadata if pinned
     ├── log.md              # change history, newest first, ISO dates
     ├── datasets/           # example: datasets/example-dataset.md
     ├── gotchas/            # example: gotchas/example-gotcha.md
