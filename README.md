@@ -74,6 +74,7 @@ Two rules that keep bundles trustworthy:
 your-repo/
 ├── README.md
 ├── CODEOWNERS              # stewards of /knowledge/
+├── .github/workflows/bundle-gate.yml  # conformance and signature debt, as CI
 └── knowledge/              # the bundle root
     ├── index.md            # okf_version frontmatter; every concept listed
     ├── log.md              # change history, newest first, ISO dates
@@ -94,4 +95,9 @@ uv run <path-to-nasa-daac-knowledge>/tools/check_okf_v02.py knowledge
 
 The four examples pass it with 0 errors; the warnings it reports on
 them (unverified tier) are what any draft shows until a steward signs.
-Lint with the knowledge-linter agent (core plugin) before every release.
+`.github/workflows/bundle-gate.yml` runs the same checker, the PEP 723
+header check on any script, and the signature-debt measure on every
+pull request and on main, and enforces zero debt on a release tag; a
+repository copied from this template is gated from its first pull
+request. The one edit it needs is the tag pattern, `{name}--v*`. Lint
+with the knowledge-linter agent (core plugin) before every release.
