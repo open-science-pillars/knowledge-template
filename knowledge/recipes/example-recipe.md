@@ -1,5 +1,9 @@
 ---
 type: recipe
+# spheres (required, OSP): the Earth science spheres this claim spans, one
+# or more of atmosphere, biosphere, cryosphere, geosphere, hydrosphere.
+# Optional gcmd: GCMD science keywords as strings.
+spheres: [hydrosphere]
 title: "Example basin-mean SST anomaly series"
 description: "Annotated example of a recipe concept; a validated analysis pattern with expected values and uncertainty."
 tags: [example, anomaly, time-series]

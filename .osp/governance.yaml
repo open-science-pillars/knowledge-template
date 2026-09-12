@@ -1,7 +1,8 @@
-schema_version: 1
+schema_version: 2
 repository: knowledge-template
 maintainers:
-  users: [PaulMRamirez]
+  users:
+  - PaulMRamirez
   teams: []
   status: interim
 roadmap:
@@ -11,3 +12,4 @@ reviews:
   ordinary: 1
   cross_repository: org-policy
   knowledge: org-knowledge-policy
+  runtime_adapter: org-runtime-policy
