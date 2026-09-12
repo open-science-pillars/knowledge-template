@@ -1,6 +1,10 @@
 ---
 # type is REQUIRED by OKF. For a data product it is `dataset`.
 type: dataset
+# spheres (required, OSP): the Earth science spheres this claim spans, one
+# or more of atmosphere, biosphere, cryosphere, geosphere, hydrosphere.
+# Optional gcmd: GCMD science keywords as strings.
+spheres: [hydrosphere]
 title: "Example Gridded SST Product v2.1"
 description: "Annotated example of a dataset concept; copy, fill, delete."
 tags: [example, sst, gridded]

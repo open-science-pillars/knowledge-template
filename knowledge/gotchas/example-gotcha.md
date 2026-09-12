@@ -1,5 +1,9 @@
 ---
 type: dataset-gotcha
+# spheres (required, OSP): the Earth science spheres this claim spans, one
+# or more of atmosphere, biosphere, cryosphere, geosphere, hydrosphere.
+# Optional gcmd: GCMD science keywords as strings.
+spheres: [hydrosphere]
 title: "Example fill values unmasked in v2.1 NetCDF files"
 description: "Annotated example of a gotcha concept; one trap per file."
 tags: [example, fill-values]

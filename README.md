@@ -25,6 +25,13 @@ checker red-flags unquoted ones):
 - `type` (REQUIRED by OKF): `dataset`, `dataset-gotcha`, `recipe`,
   `convention`, `connector` or `finding`
 - `title`, `description`, `tags` (required org-wide)
+- `spheres` (required org-wide on every concept except the `connector`
+  and `requirement` types): the Earth science spheres the claim spans,
+  one or more of `atmosphere`, `biosphere`, `cryosphere`, `geosphere`,
+  `hydrosphere`; a snow concept lists both hydrosphere and cryosphere.
+  The checker rejects a scientific concept without it. Optional `gcmd`:
+  GCMD science keywords as strings. Both are classification, outside
+  the text a steward's signature binds.
 - `generated: { by: <actor>, at: <ISO datetime> }`: who wrote the
   concept and when. Actors are `human:<id>`, `process:<id>`,
   `team:<id>` or `owner/tool` (OKF v0.2 §7).

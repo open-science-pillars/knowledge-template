@@ -1,5 +1,9 @@
 ---
 type: convention
+# spheres (required, OSP): the Earth science spheres this claim spans, one
+# or more of atmosphere, biosphere, cryosphere, geosphere, hydrosphere.
+# Optional gcmd: GCMD science keywords as strings.
+spheres: [hydrosphere]
 title: "Example seasonal-mean calendar convention"
 description: "Annotated example of a convention concept; a cross-cutting practice, no required extras beyond the org-wide fields."
 tags: [example, calendar, seasons]
