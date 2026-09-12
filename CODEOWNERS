@@ -1,6 +1,8 @@
-# Interim repository ownership; replace with the repository maintainer team at handoff.
-* @PaulMRamirez
+# Ownership by team (ADR A, decision 10; the registry is osp/teams.yaml in
+# build-kit). One person occupies every team during the interim solo period;
+# accepting a maintainer is a team membership change, not an edit here.
+* @open-science-pillars/foundation-maintainers
 
-# Knowledge bundle stewardship: a bundle copied from this template
-# names its stewards here so PRs auto-request them.
-/knowledge/ @PaulMRamirez
+# A bundle copied from this template names its steward team here so pull
+# requests auto-request it.
+/knowledge/       @open-science-pillars/foundation-maintainers

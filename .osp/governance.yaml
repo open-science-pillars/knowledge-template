@@ -3,7 +3,8 @@ repository: knowledge-template
 maintainers:
   users:
   - PaulMRamirez
-  teams: []
+  teams:
+  - foundation-maintainers
   status: interim
 roadmap:
   proposals: enabled
