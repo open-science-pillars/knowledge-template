@@ -37,7 +37,8 @@ concept, steward, provider bundle) are defined in the
    for conformance and `uv run ../build-kit/scripts/osp.py validate .`
    for the metadata. The four examples pass the checker with 0 errors;
    the warnings it reports on them (unverified tier) are what any draft
-   shows until a steward signs.
+   shows until a human review of any role signs it; a data provider's
+   confirmation is invited and never required.
 5. **Open the first pull request.** `.github/workflows/bundle-gate.yml`
    runs on every pull request and on main: the canonical metadata
    validates (`osp.py validate`), the bundle conforms to OKF v0.2
@@ -47,7 +48,11 @@ concept, steward, provider bundle) are defined in the
    bookkeeping, no em or en dashes) and the signature debt is reported
    (`signature_check.py`, the merge-then-sign rule); a release tag
    enforces zero debt. Lint with the knowledge-linter agent (core
-   plugin) before every release.
+   plugin) before every release. `uv run ../nasa-daac-knowledge/tools/digest.py knowledge/`
+   renders `knowledge/DIGEST.md`, what the bundle claims about each
+   product with status, tier, evidence and a confirm link per claim:
+   the page a provider contact reads to confirm a concept or decide
+   what they could take on.
 
 ## What a bundle is
 
@@ -87,8 +92,9 @@ extras of each:
 This template carries four annotated examples, one each of `dataset`,
 `dataset-gotcha`, `recipe` and `convention`; the provider bundles in
 nasa-daac-knowledge carry live examples of the rest. How to write a
-concept (frontmatter, sources, status, the steward's signature, the
-rule that concepts state facts and never instruct the agent) is the
+concept (frontmatter, sources, status, the human review of any role
+that signs it with provider confirmation invited, the rule that
+concepts state facts and never instruct the agent) is the
 marketplace repository's
 [docs/contributing-knowledge.md](https://github.com/open-science-pillars/marketplace/blob/main/docs/contributing-knowledge.md),
 and what the checker demands, warning by warning, is
