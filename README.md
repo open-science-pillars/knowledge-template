@@ -41,7 +41,9 @@ concept, steward, provider bundle) are defined in the
    confirmation is invited and never required.
 5. **Open the first pull request.** `.github/workflows/bundle-gate.yml`
    runs on every pull request and on main: the canonical metadata
-   validates (`osp.py validate`), the bundle conforms to OKF v0.2
+   validates (`osp.py validate`), every file of code has one home by
+   plane (`osp.py placement-check`, the placement rule of ADR C), the
+   bundle conforms to OKF v0.2
    (`check_okf_v02.py`), every script's PEP 723 header covers what it
    imports (`check_script_deps.py`), the wording rules hold
    (`check_prose.py`: specification rules cited by name, no program
@@ -75,7 +77,12 @@ extras of each:
 - `recipe`: a validated analysis pattern with inputs, expected values
   and expected-uncertainty ranges.
 - `computation`: one attested computation, its sanctioned code identity,
-  manifested inputs and the receipt of one run.
+  manifested inputs and the receipt of one run. Its executor, attester
+  and loaders live in the bundle's `references/` tree, and its run
+  instructions (the walkthrough an agent follows) are a skill in the
+  capability whose sphere the concept names, never a concept or a
+  directory in the bundle (the placement rule, ADR C in the marketplace
+  repository's docs/decisions).
 - `convention`: a cross-cutting practice.
 - `finding`: one falsifiable scientific claim bound to its receipts,
   validity adjudication and confrontation.
