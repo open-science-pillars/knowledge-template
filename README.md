@@ -2,7 +2,9 @@
 
 A conformant Open Knowledge Format (OKF) bundle to copy when starting a
 new knowledge bundle, with four annotated example concepts (a dataset,
-a gotcha, a recipe, a convention). Conformance target: OKF v0.2
+a gotcha, a recipe, a convention). A bundle holds knowledge and
+evidence and no runnable code: concepts, their sources, and the
+evidence files a concept cites. Conformance target: OKF v0.2
 (github.com/GoogleCloudPlatform/knowledge-catalog; the exact text the
 organization conforms to is vendored in the marketplace repository
 under docs/upstream) plus the Open Science Pillars requirements of the
@@ -41,9 +43,8 @@ concept, steward, provider bundle) are defined in the
    confirmation is invited and never required.
 5. **Open the first pull request.** `.github/workflows/bundle-gate.yml`
    runs on every pull request and on main: the canonical metadata
-   validates (`osp.py validate`), every file of code has one home by
-   plane (`osp.py placement-check`, the placement rule of ADR C), the
-   bundle conforms to OKF v0.2
+   validates (`osp.py validate`, which is also what fails a runnable
+   file under `knowledge/`), the bundle conforms to OKF v0.2
    (`check_okf_v02.py`), every script's PEP 723 header covers what it
    imports (`check_script_deps.py`), the wording rules hold
    (`check_prose.py`: specification rules cited by name, no program
@@ -64,6 +65,17 @@ per large subdirectory) lists every concept; `log.md` records change
 history. Concepts cross-link with standard markdown links; every gotcha
 links its dataset concept.
 
+A bundle holds knowledge and evidence, and nothing in it is runnable.
+What a steward signs is under `knowledge/`; what an agent runs is a
+skill in the capability that runs it, with its scripts beside it. The
+repository's own gates live in `tools/` and are not knowledge.
+
+`references/` is for mirrored external material and evidence files
+only: a copy of a provider document a concept cites, data files such as
+masks and calibration tables, and the stamped inputs and receipts that
+evidence a signed number. No executor, attester, loader or other
+script belongs there.
+
 ## Concept types
 
 The specification's concept types section (docs/SPECIFICATION.md in
@@ -76,13 +88,14 @@ extras of each:
   the correct approach; a high severity requires a matching eval case.
 - `recipe`: a validated analysis pattern with inputs, expected values
   and expected-uncertainty ranges.
-- `computation`: one attested computation, its sanctioned code identity,
-  manifested inputs and the receipt of one run. Its executor, attester
-  and loaders live in the bundle's `references/` tree, and its run
-  instructions (the walkthrough an agent follows) are a skill in the
-  capability whose sphere the concept names, never a concept or a
-  directory in the bundle (the placement rule, ADR C in the marketplace
-  repository's docs/decisions).
+- `computation`: one attested computation, its sanctioned code
+  identity, manifested inputs and the receipt of one run. A computation
+  is a skill, so this type does not belong in a provider bundle at all:
+  the concept lives in the capability that runs it, under that
+  package's `knowledge/computations/`, and its `computation` and
+  `attester.resource` name files under `skills/<name>/scripts/` in the
+  same package, proved by a golden under `verification/`. The plugin
+  template ships one as the shape to copy.
 - `convention`: a cross-cutting practice.
 - `finding`: one falsifiable scientific claim bound to its receipts,
   validity adjudication and confrontation.
@@ -98,7 +111,10 @@ extras of each:
 
 This template carries four annotated examples, one each of `dataset`,
 `dataset-gotcha`, `recipe` and `convention`; the provider bundles in
-nasa-daac-knowledge carry live examples of the rest. How to write a
+nasa-daac-knowledge carry live examples of the rest, and the
+[plugin template](https://github.com/open-science-pillars/plugin-template)
+carries the `computation` one, in the capability where a computation
+belongs. How to write a
 concept (frontmatter, sources, status, the human review of any role
 that signs it with provider confirmation invited, the rule that
 concepts state facts and never instruct the agent) is the
@@ -117,13 +133,14 @@ your-repo/
 │   ├── repository.yaml     # kind, status, spheres, discipline; rename before it validates
 │   └── governance.yaml     # maintainers, review policy
 ├── .github/workflows/bundle-gate.yml  # conformance and signature debt, as CI
-└── knowledge/              # the bundle root
+└── knowledge/              # the bundle root: knowledge and evidence, no runnable code
     ├── index.md            # okf_version frontmatter; every concept listed
     ├── log.md              # change history, newest first, ISO dates
     ├── datasets/           # example: datasets/example-dataset.md
     ├── gotchas/            # example: gotchas/example-gotcha.md
     ├── recipes/            # example: recipes/example-recipe.md
-    └── conventions/        # example: conventions/example-convention.md
+    ├── conventions/        # example: conventions/example-convention.md
+    └── references/         # mirrored external material and evidence files, as data
 ```
 
 License: Apache-2.0. Cite via [CITATION.cff](CITATION.cff).
